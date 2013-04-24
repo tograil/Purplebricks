@@ -22,23 +22,26 @@
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            @try
+                            {
+                                if (User.IsInRole("Buyer"))
+                                {
+                                    <li>@Html.ActionLink("Proposals", "Index", "Buyer")</li>
+                                }
+                                else if (User.IsInRole("Seller"))
+                                {
+                                    <li>@Html.ActionLink("Seller Home", "Index", "Seller")</li>
+                                    <li>@Html.ActionLink("Add Property", "AddProperty", "Seller")</li>
+                                    <li>@Html.ActionLink("Import Property", "ImportProperties", "Seller")</li>
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink("About", "About", "Home")</li>
                            
-                            @if (User.IsInRole("Buyer"))
-                            {
-                                <li>@Html.ActionLink("Proposals", "Index", "Buyer")</li>
+                                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                }
                             }
-                            else if (User.IsInRole("Seller"))
-                            {
-                                <li>@Html.ActionLink("Seller Home", "Index", "Seller")</li>
-                                <li>@Html.ActionLink("Add Property", "AddProperty", "Seller")</li>
-                                <li>@Html.ActionLink("Import Property", "ImportProperties", "Seller")</li>
-                            }
-                            else
-                            {
-                                <li>@Html.ActionLink("About", "About", "Home")</li>
-                           
-                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            }
+                            catch { }
                         </ul>
                     </nav>
                 </div>
