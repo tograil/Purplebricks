@@ -49,3 +49,4 @@ D:\Projects\Purplebricks\Purplebricks\obj\Debug\Purplebricks.pdb
 D:\Projects\Purplebricks\Purplebricks\obj\Debug\Purplebricks.csprojResolveAssemblyReference.cache
 D:\Projects\Purplebricks\Purplebricks\obj\Debug\Purplebricks.Migrations.InitialMigrations.resources
 D:\Projects\Purplebricks\Purplebricks\obj\Debug\Purplebricks.csproj.GenerateResource.Cache
+D:\Projects\Purplebricks\Purplebricks\obj\Debug\Purplebricks.Migrations.InitialMigrations1.resources
