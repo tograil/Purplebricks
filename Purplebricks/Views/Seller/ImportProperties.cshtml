@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "ImportProperties";
+}
+
+@using (Html.BeginForm("ImportProperties", "Seller", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="excel" />
+    <input type="submit" value="OK" />
+}

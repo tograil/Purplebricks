@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Purplebricks.Models.OfferModel>
+
+@{
+    ViewBag.Title = "Offers";
+}
+
+<table>
+    <thead>
+        <tr>
+        <th style="width:150px">User</th>
+        <th style="width:150px">Value</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    
+    <tbody id="properties">
+    @foreach (var property in Model)
+    {
+        <tr>
+            <td>@property.UserName</td>
+            <td>@(property.Value.HasValue ? property.Value.Value.ToString("0.00") : "0.00")</td>
+            <td>@Html.ActionLink("Accept", "AcceptOrReject", new { PropertyID = property.PropertyID, OfferID = property.OfferID, Accept = true })</td>
+            <td>@Html.ActionLink("Reject", "AcceptOrReject", new { PropertyID = property.PropertyID, OfferID = property.OfferID, Accept = false })</td>
+        </tr>
+    }
+    </tbody>
+
+</table>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Purplebricks.Models.Property>
+@{
+    ViewBag.Title = "Properties";
+}
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        $("#searchField").keyup(function () {
+            
+            var posting = $.post('/Buyer/FilteredList', { filter: $("#searchField").val() });
+                
+            posting.done(function (data) {
+                var content = '';
+                for (var i = 0; i < data.length; i++) {
+                    content += '<tr>';
+                    content += '<td>' + data[i].Name + '</td>';
+                    content += '<td>' + data[i].Type + '</td>';
+                    content += '<td>' + data[i].Description + '</td>';
+                    content += '<td><a href="/Buyer/MakeOffer?PropertyID=' + data[i].PropertyId + ' ">Offer</a></td>';
+                    content += '</tr>';
+                }
+
+                $("#properties").empty().append(content);
+            });
+            
+        });
+    });
+   
+</script>
+
+ <fieldset>
+     <legend>Filter list</legend>
+    <input id="searchField" type="text" value="" />
+</fieldset>
+
+
+<table>
+    <tr>
+        <th style="width:150px">Name</th>
+        <th style="width:150px">Type</th>
+        <th style="width:250px">Description</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tbody id="properties">
+    @foreach (var property in Model)
+    {
+        <tr>
+            <td>@property.Name</td>
+            <td>@property.Type</td>
+            <td>@property.Description</td>
+            <td>@Html.ActionLink("Offer", "MakeOffer", new { PropertyID = property.PropertyId })</td>
+        </tr>
+    }
+    </tbody>
+</table>

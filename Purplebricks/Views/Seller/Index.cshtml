@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Purplebricks.Models.SellerPropertyModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        $("#searchField").keyup(function () {
+            
+            var posting = $.post('/Seller/FilteredList', { filter: $("#searchField").val() });
+                
+            posting.done(function (data) {
+                var content = '';
+                for (var i = 0; i < data.length; i++) {
+                    content += '<tr>';
+                    content += '<td>' + data[i].Name + '</td>';
+                    content += '<td>' + data[i].Type + '</td>';
+                    content += '<td>' + data[i].Description + '</td>';
+                    content += '<td><a href="/Seller/Offers?PropertyID=' + data[i].PropertyId + ' ">Offers (' + data[i].OffersCount + ')</a></td>';
+                    content += '<td><a href="/Seller/AddProperty?PropertyID=' + data[i].PropertyId + ' ">Edit</a></td>';
+                    content += '</tr>';
+                }
+
+                $("#properties").empty().append(content);
+            });
+            
+        });
+    });
+   
+</script>
+
+ <fieldset>
+     <legend>filter list</legend>
+    <input id="searchField" type="text" value="" />
+</fieldset>
+
+
+<table>
+    <thead>
+        <tr>
+        <th style="width:150px">Name</th>
+        <th style="width:150px">Type</th>
+        <th style="width:250px">Description</th>
+        <th style="width:100px">Offers</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    
+    <tbody id="properties">
+    @foreach (var property in Model)
+    {
+        <tr>
+            <td>@property.Name</td>
+            <td>@property.Type</td>
+            <td>@property.Description</td>
+            <td><a href="/Seller/Offers?PropertyID=@property.PropertyId">Offers (@property.OffersCount)</a></td>
+            <td>@Html.ActionLink("Edit", "AddProperty", new { PropertyID = property.PropertyId })</td>
+        </tr>
+    }
+    </tbody>
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

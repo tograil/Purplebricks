@@ -1,0 +1,27 @@
+﻿@model Purplebricks.Models.OfferModel
+@{
+    ViewBag.Title = "Make Offer";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Value)
+                @Html.TextBoxFor(m => m.Value)
+            </li>
+            <li>
+                @Html.HiddenFor(m => m.PropertyID)
+            </li>
+        </ol>
+        <input type="submit" value="Submit" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
